@@ -1,6 +1,9 @@
+## Pinacle of Discord Selfbotting
+
 discord
 ==========
 A modern, easy to use, API wrapper for Discord User Accounts
+
 
 
 Key Features
