@@ -71,3 +71,55 @@ class GatewayRatelimiter:
                 )
 
                 await sleep(delta)
+
+
+class HTTPRatelimiter:
+    DEFAULT_TIMEOUT = 10
+
+    def __init__(self, id):
+        self.id = id
+        self.lock = Lock()
+        self.after = 0.0
+        self.last = time()
+
+    def set(self, data):
+        """Set the retry after value."""
+
+        self.last = time()
+        if 'retry_after' in data:
+            retry_after = data['retry_after']
+        else:
+            retry_after = self.DEFAULT_TIMEOUT
+
+        self.after = retry_after
+
+    def get_delay(self):
+        """Get the remaining delay in seconds."""
+
+        current = time()
+        if (current - self.last) >= self.after:
+            self.after = 0.0
+
+        return self.after
+
+    async def __aexit__(self, exc_type, exc, tb):
+        return None
+
+    async def __aenter__(self):
+
+        async with self.lock:
+            delta = self.get_delay()
+
+            if delta <= 0:
+                return None
+
+            _log.warning(
+                'Ratelimited for %.2f seconds',
+                delta,
+                extra={
+                    'className': self.__class__.__name__,
+                    'clientId': self.id,
+                }
+            )
+
+            await sleep(delta)

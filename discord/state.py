@@ -45,9 +45,10 @@ from copy import copy
 
 class ConnectionState:
 
-    def __init__(self, loop, token, dispatch):
+    def __init__(self, loop, token, dispatch, http):
         self.loop = loop
         self.token = token
+        self.http = http
         self.dispatch = dispatch
         self.id = token[:TOKEN_ID_LENGTH]
         self.device = self._get_device()
@@ -95,6 +96,15 @@ class ConnectionState:
 
         guild = Guild(state=self, data=data)
         self._guilds[guild.id] = guild
+
+    def _create_message(self, data):
+        channel, guild = self._get_guild_channel(data)
+
+        if channel is None:
+            return None
+
+        # Create the message from the channel and or guild
+        return message_factory(guild, channel, data)
 
     def parse_ready(self, data):
         self._user = self._create_client_user(data['user'])
@@ -148,14 +158,9 @@ class ConnectionState:
         return channel, guild
 
     def parse_message_create(self, data):
-        # Resolve the channel and or guild
-        channel, guild = self._get_guild_channel(data)
-
-        if channel is None:
-            return None
 
         # Create the message from the channel and or guild
-        message = message_factory(guild, channel, data)
+        message = self._create_message(data)
 
         if message is None:
             return None
@@ -182,6 +187,7 @@ class ConnectionState:
         older_message = copy(message)
 
         # Update the message data
+
         message._update(data)
 
         self.dispatch('message_edit', older_message, message)

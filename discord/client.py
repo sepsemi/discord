@@ -36,6 +36,13 @@ from .gateway import (
     ReconnectWebSocket
 )
 
+from .iterators import (
+    HistoryIterator,
+    SearchIterator
+)
+
+from .http import HTTPClient
+
 DEFAULT_SLEEP_TIME = 1
 
 _log = getLogger(__name__)
@@ -59,6 +66,24 @@ class Client:
         loop = new_event_loop()
         set_event_loop(loop)
         return loop
+
+    def _get_connection(self):
+        """Return a ConnectionState"""
+
+        return ConnectionState(
+            loop=self.loop,
+            token=self.token,
+            dispatch=self.dispatch,
+            http=HTTPClient(client=self)
+        )
+
+    def _get_websocket(self, parameters):
+        """Return a DiscordWebsocket"""
+
+        return DiscordWebsocket(
+            client=self,
+            parameters=parameters
+        )
 
     def _schedule_event(self, coro, event_name, *args, **kwargs):
         # Schedules the task
@@ -86,21 +111,31 @@ class Client:
     def users(self):
         return (user for user in self._connection._users.values())
 
-    def _get_connection(self):
-        """Return a ConnectionState"""
+    def history(self, channel):
+        """Get the history of a channel"""
 
-        return ConnectionState(
-            loop=self.loop,
-            token=self.token,
-            dispatch=self.dispatch
+        iterator = HistoryIterator(
+            state=self._connection,
+            channel=channel
         )
 
-    def _get_websocket(self, parameters):
-        """Return a DiscordWebsocket"""
+        return iterator.history(limit=9999)
 
-        return DiscordWebsocket(
-            client=self,
-            parameters=parameters
+    def search(self, guild=None, channel=None, **kwargs):
+        """Get the results for a query"""
+
+        iterator = SearchIterator(
+            state=self._connection,
+            guild=guild,
+            channel=channel
+        )
+
+        return iterator.search(**kwargs)
+
+    async def delete_message(self, channel_id, message_id):
+        return await self._connection.http.delete_message(
+            channel_id=channel_id,
+            message_id=message_id
         )
 
     def _update_parameters(self, params, resume):

@@ -16,6 +16,8 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 """
 
+API_VERSION = 9
+
 # Z_SYNC_FLUSH suffix
 ZLIB_SUFFIX = b'\x00\x00\xff\xff'
 
@@ -36,3 +38,5 @@ TOKEN_ID_LENGTH = 12
 
 # Max time we wait for receiving anything
 HEARTBEAT_TIMEOUT = 45.0
+
+HTTP_API_URL = 'https://discord.com/api/v{version}'.format(version=API_VERSION)
