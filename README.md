@@ -1,8 +1,15 @@
 ## Pinacle of Discord Selfbotting
 
-discord
+## Notes
+This is just a DIY project,
+1) Expect bugs,
+2) Late updates if any
+3) No support
+
+Unamed Library
 ==========
 A modern, easy to use, API wrapper for Discord User Accounts
+
 
 
 
