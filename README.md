@@ -26,8 +26,12 @@ Dependencies
 Installing
 -------------
 ```bash
+ 
+    # Close the source code, of the project
     git clone git@github.com:sepsemi/discord.git
     cd discord/
+
+    # Move the example file into the Current Working Directory
     cp ./examples/single.py ./main.py
     
     # Install pipenv for easier dependecy management.
