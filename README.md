@@ -36,6 +36,8 @@ Installing
     
     # Install pipenv for easier dependecy management.
     python3 -m pip install pipenv
+
+    # Start a Pipenv shell sperating our dependecies from the host.
     python3 -m pipenv shell
 
     # Install the required project dependencies
