@@ -12,10 +12,29 @@ Key Features
 
 Requirements
 -------------
+- [Linux](https://www.debian.org/)
+- [Git](https://git-scm.com/)
+- [python >= 3.7](https://www.python.org/downloads/release/python-370/)
 
-[Linux](https://www.debian.org/)
-[Git](https://git-scm.com/)
-[python >= 3.7](https://www.python.org/downloads/release/python-370/)
+Dependencies
+-------------
+- [Asyncio](https://docs.python.org/3/library/asyncio.html)
+- [Aiohttp](https://docs.aiohttp.org/en/stable/)
+- [Websockets](https://websockets.readthedocs.io/en/stable/faq/asyncio.html)
+- [Msgspec](https://jcristharif.com/msgspec/)
 
+Installing
+-------------
+```bash
+    git clone git@github.com:sepsemi/discord.git
+    cd discord/
+    cp ./examples/single.py ./main.py
+
+    python3 -m pip install pipenv
+    python3 -m pipenv shell
+    python pipenv install
+
+    python main.py
+````
 
 
