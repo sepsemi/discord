@@ -13,9 +13,9 @@ Key Features
 Requirements
 -------------
 
-\- [Linux](https://www.debian.org/)
-\- [Git](https://git-scm.com/)
-\- [python >= 3.7](https://www.python.org/downloads/release/python-370/)
+\ - [Linux](https://www.debian.org/)
+\ - [Git](https://git-scm.com/)
+\ - [python >= 3.7](https://www.python.org/downloads/release/python-370/)
 
 
 
