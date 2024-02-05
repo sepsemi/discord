@@ -2,9 +2,9 @@
 
 ## Notes
 This is just a DIY project,
-1) Expect bugs,
-2) Late updates if any
-3) No support
+1. Expect bugs,
+2. Late updates if any
+3. No support
 
 Unamed Library
 ==========
