@@ -1,8 +1,8 @@
 ## Pinacle of Discord Selfbotting
 
 ## Notes
-This is just a DIY project,
-1. Expect bugs,
+This is just a DIY project:
+1. Expect bugs
 2. Late updates if any
 3. No support
 
@@ -10,15 +10,13 @@ Unamed Library
 ==========
 A modern, easy to use, API wrapper for Discord User Accounts
 
-
-
-
 Key Features
 -------------
 - Modern Pythonic API using ``async`` and ``await``.
 - Proper rate limit handling.
 - Optimised in both speed and memory.
 - Handles Multiple Accounts
+- Prevents detection of user account automation
 
 Requirements
 -------------
