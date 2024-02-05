@@ -29,12 +29,15 @@ Installing
     git clone git@github.com:sepsemi/discord.git
     cd discord/
     cp ./examples/single.py ./main.py
-
+    
+    # Install pipenv for easier dependecy management.
     python3 -m pip install pipenv
     python3 -m pipenv shell
-    python pipenv install
 
+    # Install the required project dependencies
+    python pipenv install
+    
+    # Run the application
     python main.py
 ````
-
 
