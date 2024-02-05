@@ -182,7 +182,6 @@ class ConnectionState:
         older_message = copy(message)
 
         # Update the message data
-
         message._update(data)
 
         self.dispatch('message_edit', older_message, message)

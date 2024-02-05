@@ -141,7 +141,7 @@ class DiscordWebsocket:
         return Connect(
             uri=self.uri,
             user_agent_header=self.device.headers['browser_user_agent'],
-            ** WEBSOCKET_CONFIGURATION
+            **WEBSOCKET_CONFIGURATION
         )
 
     def _get_keep_alive(self, interval):

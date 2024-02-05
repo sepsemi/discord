@@ -17,11 +17,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 """
 
 
-from copy import deepcopy
 from logging import getLogger
 
 from typing import Dict
-from enum import IntEnum
 from dataclasses import dataclass
 
 from .util import to_json
@@ -63,13 +61,6 @@ def create_channel_subscribe_collection(channel_ids, collection):
         channels[str(channel_id)] = collection
 
     return channels
-
-
-class Permissions(IntEnum):
-
-    HISTORY = (1 << 16)
-    VIEW_CHANNEL = (1 << 9)
-    SEND_MESSAGES = (1 << 11)
 
 
 @dataclass
